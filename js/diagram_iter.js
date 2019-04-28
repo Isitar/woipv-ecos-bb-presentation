@@ -102,7 +102,7 @@ Promise.all([
     d3.dsv(";", "/data/score_1_0.csv"),
     d3.dsv(";", "/data/score_1_1.csv"),
     d3.dsv(";", "/data/score_1_2.csv"),
-    d3.dsv(";", "/data/score_1_2.csv"),
+    d3.dsv(";", "/data/score_1_3.csv"),
     d3.dsv(";", "/data/score_1_4.csv"),
 ])
     .then(data => {
@@ -115,7 +115,7 @@ Promise.all([
     d3.dsv(";", "/data/score_2_0.csv"),
     d3.dsv(";", "/data/score_2_1.csv"),
     d3.dsv(";", "/data/score_2_2.csv"),
-    d3.dsv(";", "/data/score_2_2.csv"),
+    d3.dsv(";", "/data/score_2_3.csv"),
     d3.dsv(";", "/data/score_2_4.csv"),
 ])
     .then(data => {
