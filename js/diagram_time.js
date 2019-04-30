@@ -124,3 +124,16 @@ Promise.all([
         var svg = d3.select('#diagram_time_2');
         diagramTime(data, svg);
     });
+
+
+    Promise.all([
+        d3.dsv(";", "/data/score_2_long_0.csv"),
+        d3.dsv(";", "/data/score_2_long_1.csv"),
+        d3.dsv(";", "/data/score_2_long_2.csv"),
+        d3.dsv(";", "/data/score_2_long_3.csv"),
+        d3.dsv(";", "/data/score_2_long_4.csv"),
+    ])
+        .then(data => {
+            var svg = d3.select('#diagram_time_3');
+            diagramTime(data, svg)
+        });

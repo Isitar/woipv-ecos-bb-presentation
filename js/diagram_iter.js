@@ -15,7 +15,7 @@ function iterDiagram(data, svg) {
     let maxY = 0;
     for (let i = 0; i < data.length; i++) {
         maxIt = Math.max(maxIt, ...data[i].map(d => d.iter))
-        maxY = Math.max(maxY, ...data[i].map(d => d.U === 'inf' ? 0 : d.U));
+        maxY = 10;//Math.max(maxY, ...data[i].map(d => d.U === 'inf' ? 0 : d.U));
     }
 
     var xScale = d3.scaleLinear()
@@ -122,3 +122,15 @@ Promise.all([
         var svg = d3.select('#diagram_iter_2');
         iterDiagram(data, svg)
     });
+
+    Promise.all([
+        d3.dsv(";", "/data/score_2_long_0.csv"),
+        d3.dsv(";", "/data/score_2_long_1.csv"),
+        d3.dsv(";", "/data/score_2_long_2.csv"),
+        d3.dsv(";", "/data/score_2_long_3.csv"),
+        d3.dsv(";", "/data/score_2_long_4.csv"),
+    ])
+        .then(data => {
+            var svg = d3.select('#diagram_iter_3');
+            iterDiagram(data, svg)
+        });
