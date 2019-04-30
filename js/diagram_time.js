@@ -51,7 +51,7 @@
         g.append("text")
             .attr("transform", `translate(${width / 2},${height + margin.top})`)
             .style("text-anchor", "middle")
-            .text("t");
+            .text("t [s]");
 
         g.append("g")
             .classed("y-axis", true)
