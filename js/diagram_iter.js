@@ -6,16 +6,24 @@ var branchingStrategy = {
     4: 'Random branching'
 };
 
-function iterDiagram(data, svg) {
-    var margin = { top: 50, right: 50, bottom: 50, left: 50 }
-        , width = svg.attr("width") - margin.left - margin.right // Use the window's width 
-        , height = svg.attr("height") - margin.top - margin.bottom; // Use the window's height
+var diagrams = {
+    'misc07_score16': 'misc07_score16_iter',
+    'score_1': 'markshare_score1_iter',
+    'score_2': 'markshare_score2_iter',
+};
 
+function iterDiagram(data, svg) {
+    
+    var margin = { top: 50, right: 50, bottom: 50, left: 50 }
+        , width = +svg.attr("width") - margin.left - margin.right // Use the window's width 
+        , height = +svg.attr("height") - margin.top - margin.bottom; // Use the window's height
+
+        
     let maxIt = 0;
     let maxY = 0;
     for (let i = 0; i < data.length; i++) {
         maxIt = Math.max(maxIt, ...data[i].map(d => d.iter))
-        maxY = 10;//Math.max(maxY, ...data[i].map(d => d.U === 'inf' ? 0 : d.U));
+        maxY = Math.max(maxY, ...data[i].map(d => d.U === 'inf' ? d.L : d.U));
     }
 
     var xScale = d3.scaleLinear()
@@ -25,7 +33,6 @@ function iterDiagram(data, svg) {
     var yScale = d3.scaleLinear()
         .domain([0, maxY])
         .range([height, 0]);
-
     // iter diagram
     var g = svg
         .append("g")
@@ -48,7 +55,7 @@ function iterDiagram(data, svg) {
         .attr("x", 0 - (height / 2))
         .attr("dy", "1em")
         .style("text-anchor", "middle")
-        .text("UB");
+        .text("LB / UB");
 
 
     //data
@@ -70,6 +77,17 @@ function iterDiagram(data, svg) {
             .classed(`line d-${i}`, true)
             .attr('stroke', colorScale(i))
             .attr("d", lineIter);
+        g.append("path")
+            .datum(data[i].map(d => {
+                return {
+                    x: d.iter,
+                    y: (d.L === "inf" ? Number.MAX_SAFE_INTEGER : d.L)
+                };
+            }))
+            .classed(`line d-${i}`, true)
+            .attr('stroke', colorScale(i))
+            .attr("d", lineIter);
+
         legendEntriesArr.splice(i, 0, branchingStrategy[i]);
     }
     // legend
@@ -97,40 +115,18 @@ function iterDiagram(data, svg) {
         .text(d => d)
 }
 
-
-Promise.all([
-    d3.dsv(";", "/data/score_1_0.csv"),
-    d3.dsv(";", "/data/score_1_1.csv"),
-    d3.dsv(";", "/data/score_1_2.csv"),
-    d3.dsv(";", "/data/score_1_3.csv"),
-    d3.dsv(";", "/data/score_1_4.csv"),
-])
-    .then(data => {
-        var svg = d3.select('#diagram_iter_1');
-        iterDiagram(data, svg)
-    });
-
-
-Promise.all([
-    d3.dsv(";", "/data/score_2_0.csv"),
-    d3.dsv(";", "/data/score_2_1.csv"),
-    d3.dsv(";", "/data/score_2_2.csv"),
-    d3.dsv(";", "/data/score_2_3.csv"),
-    d3.dsv(";", "/data/score_2_4.csv"),
-])
-    .then(data => {
-        var svg = d3.select('#diagram_iter_2');
-        iterDiagram(data, svg)
-    });
-
+for (const key in diagrams) {
     Promise.all([
-        d3.dsv(";", "/data/score_2_long_0.csv"),
-        d3.dsv(";", "/data/score_2_long_1.csv"),
-        d3.dsv(";", "/data/score_2_long_2.csv"),
-        d3.dsv(";", "/data/score_2_long_3.csv"),
-        d3.dsv(";", "/data/score_2_long_4.csv"),
+        d3.dsv(";", `/data/${key}_0.csv`),
+        d3.dsv(";", `/data/${key}_1.csv`),
+        d3.dsv(";", `/data/${key}_2.csv`),
+        d3.dsv(";", `/data/${key}_3.csv`),
+        d3.dsv(";", `/data/${key}_4.csv`),
     ])
         .then(data => {
-            var svg = d3.select('#diagram_iter_3');
+            
+            var svg = d3.select(`#${diagrams[key]}`);
             iterDiagram(data, svg)
         });
+
+}

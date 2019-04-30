@@ -1,44 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-    .line {
-        fill: none;
-    }
-    .legend-text {
-        font-size: 12px;
-    }
-    body {
-        font-family: sans-serif;
-    }
+        .line {
+            fill: none;
+        }
+
+        .legend-text {
+            font-size: 12px;
+        }
+
+        body {
+            font-family: sans-serif;
+        }
     </style>
 </head>
+
 <body>
-        <section>
-    <h1>Cost / Time score function1 (fact*q_down + fact2*q_up)</h1>
-    <svg id="diagram_time_1" width="800" height="500" ></svg>
 
-    <h1>Cost / Time score function2  (q_down * q_up)</h1>
-    <svg id="diagram_time_2" width="800" height="500" ></svg>
-    <h1>Cost / Time long score function2  (q_down * q_up)</h1>
-    <svg id="diagram_time_3" width="800" height="500" ></svg>
-</section>
-<section>
-    <h1>Cost / Iter score function1  (fact*q_down + fact2*q_up)</h1>
-    <svg id="diagram_iter_1"  width="800" height="500"></svg>
+    <section>
+        <h1>Markshare</h1>
+        <h2>Score function 1/6*q_down + 5/6*q_up</h2>
+        <svg id="markshare_score1_t" width="800" height="500"></svg>
+        <h2>Score function q_down*q_up</h2>
+        <svg id="markshare_score2_t" width="800" height="500"></svg>
 
-    <h1>Cost / Iter score function2 (q_down * q_up)</h1>
-    <svg id="diagram_iter_2"  width="800" height="500"></svg>
+        <h1>misc07</h1>
+        <h2>Score function 1/6*q_down + 5/6*q_up</h2>
+        <svg id="misc07_score16_t" width="800" height="500"></svg>
+    </section>
+    <section>
+        <h1>Markshare</h1>
+        <h2>Score function 1/6*q_down + 5/6*q_up</h2>
+        <svg id="markshare_score1_iter" width="800" height="500"></svg>
+        <h2>Score function q_down*q_up</h2>
+        <svg id="markshare_score2_iter" width="800" height="500"></svg>
 
-    <h1>Cost / Iter long score function2 (q_down * q_up)</h1>
-    <svg id="diagram_iter_3"  width="800" height="500"></svg>
-</section>
+        <h1>misc07</h1>
+        <h2>Score function 1/6*q_down + 5/6*q_up</h2>
+        <svg id="misc07_score16_iter" width="800" height="500"></svg>
+
+    </section>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="js/diagram_time.js"></script>
     <script src="js/diagram_iter.js"></script>
 </body>
+
 </html>
