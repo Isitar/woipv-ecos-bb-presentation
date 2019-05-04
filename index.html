@@ -9,6 +9,7 @@
     <style>
         .line {
             fill: none;
+            stroke-width: 2px
         }
 
         .legend-text {
@@ -18,37 +19,98 @@
         body {
             font-family: sans-serif;
         }
+
+        .hidden {
+            stroke: none;
+            fill: transparent;
+            display: none;
+        }
+
+        #tooltip {
+            position: absolute;
+            border: 1px solid black;
+        }
+
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        #diagrams {
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        #diagrams>svg {
+            flex: 1 1 100vh;
+            margin-left: 2rem;
+            margin-right: 2rem;
+        }
     </style>
 </head>
 
 <body>
 
-    <section>
+    <nav>
+        <ul>
+            <li> Markshare
+                <ul>
+                    <li><a href="#markshare_score1_t">Score 1/6 min 5/6 max</a></li>
+                    <li><a href="#markshare_score2_t">Score q_down*q_up</a></li>
+                </ul>
+            </li>
+            <li>
+                misc07
+                <ul>
+                    <li><a href="#misc07_score16_t">Score 1/6 min 5/6 max</a></li>
+                    <li><a href="#misc07_score16_long_t">Score 1/6 min 5/6 max LONG</a></li>
+                    <li><a href="#misc07_scoreab_t">Score q_down+q_up</a></li>
+                    <li><a href="#other_node_selection_t">other_node_selection branching</a></li>
+                    <li><a href="#other_bb_score_min_t">other_node_selection branching score: min(q_down, q_up)</a></li>
+                </ul>
+            </li>
+        </ul>
+
+    </nav>
+<hr>
+    <section id="diagrams">
         <h1>Markshare</h1>
         <h2>Score function 1/6*q_down + 5/6*q_up</h2>
-        <svg id="markshare_score1_t" width="800" height="500"></svg>
+        <svg id="markshare_score1_t"></svg>
+        <svg id="markshare_score1_iter"></svg>
+
         <h2>Score function q_down*q_up</h2>
-        <svg id="markshare_score2_t" width="800" height="500"></svg>
+        <svg id="markshare_score2_t"></svg>
+        <svg id="markshare_score2_iter"></svg>
 
         <h1>misc07</h1>
         <h2>Score function 1/6*q_down + 5/6*q_up</h2>
-        <svg id="misc07_score16_t" width="800" height="500"></svg>
-    </section>
-    <section>
-        <h1>Markshare</h1>
-        <h2>Score function 1/6*q_down + 5/6*q_up</h2>
-        <svg id="markshare_score1_iter" width="800" height="500"></svg>
-        <h2>Score function q_down*q_up</h2>
-        <svg id="markshare_score2_iter" width="800" height="500"></svg>
+        <svg id="misc07_score16_t"></svg>
+        <svg id="misc07_score16_iter"></svg>
 
-        <h1>misc07</h1>
-        <h2>Score function 1/6*q_down + 5/6*q_up</h2>
-        <svg id="misc07_score16_iter" width="800" height="500"></svg>
+        <h2>Score function 1/6*q_down + 5/6*q_up Long</h2>
+        <svg id="misc07_score16_long_t"></svg>
+        <svg id="misc07_score16_long_iter"></svg>
 
+        <h2>Score function q_down + q_up Long</h2>
+        <svg id="misc07_scoreab_t"></svg>
+        <svg id="misc07_scoreab_iter"></svg>
+
+        <h2>other_node_selection branching</h2>
+        <svg id="other_node_selection_t"></svg>
+        <svg id="other_node_selection_iter"></svg>
+
+        <h2>other_node_selection branching score: min(q_down, q_up)</h2>
+        <svg id="other_bb_score_min_t"></svg>
+        <svg id="other_bb_score_min_iter"></svg>
     </section>
+
     <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src="js/diagram_time.js"></script>
-    <script src="js/diagram_iter.js"></script>
+    <script src="js/line_diagrams.js"></script>
 </body>
 
 </html>
