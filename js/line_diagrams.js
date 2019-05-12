@@ -2,8 +2,12 @@ var branchingStrategy = {
     0: 'Most infeasible branching',
     1: 'Strong branching',
     2: 'Pseudocost branching',
-    3: 'Hybrid branching',
-    4: 'Random branching'
+    3: 'Reliability branching (n=6)',
+    4: 'Random branching',
+    5: 'Reliability branching (n=8)',
+    6: 'Reliability branching (n=4)',
+    7: 'Reliability branching (n=1)',
+    8: 'Reliability branching (n=20)',
 };
 
 var diagrams = {
@@ -39,6 +43,9 @@ function update(data, svg, activeData, extractX, extractYLB, extractYUB, xAxisTi
     let minY = Number.POSITIVE_INFINITY;
 
     for (let i = 0; i < data.length; i++) {
+        if (data[i] === undefined) {
+            continue;
+        }
         if (activeData[i]) {
             maxX = Math.max(maxX, ...data[i].map(extractX))
             maxY = Math.max(maxY, ...data[i].map(d => d.U === 'inf' ? d.L : d.U));
@@ -123,9 +130,12 @@ function update(data, svg, activeData, extractX, extractYLB, extractYUB, xAxisTi
         focusText.style("opacity", 0)
     }
     for (let i = 0; i < data.length; i++) {
-
         colorScale(i)
-        legendEntriesArr.splice(i, 0, branchingStrategy[i]);
+        if (data[i] === undefined) {
+            continue;
+        }
+        
+        legendEntriesArr[i] = branchingStrategy[i];
 
         var u = g.select(`#ub-${i}.parent`);
         u.remove();
@@ -177,7 +187,7 @@ function update(data, svg, activeData, extractX, extractYLB, extractYUB, xAxisTi
         .attr("width", 10)
         .attr("height", 10)
         .attr("fill", (_, i) => colorScale(i))
-        .on('click', (_, i) => {
+        .on('click', (d, i) => {
             activeData[i] = !activeData[i]
             update(data, svg, activeData, extractX, extractYLB, extractYUB, xAxisTitle, yAxisTitle)
         });
@@ -203,18 +213,23 @@ function timeDiagram(data, svg) {
     for (let i = 0; i < data.length; i++) {
         activeData[i] = true;
     }
-    update(data, svg, activeData, extractTime, extractYLB, extractYUB, 't [s]');
+    update(data, svg, activeData, extractTime, extractYLB, extractYUB, 't [s]' );
 }
 
 for (const key in diagrams) {
     Promise.all([
-        d3.dsv(";", `/data/${key}_0.csv`),
-        d3.dsv(";", `/data/${key}_1.csv`),
-        d3.dsv(";", `/data/${key}_2.csv`),
-        d3.dsv(";", `/data/${key}_3.csv`),
-        d3.dsv(";", `/data/${key}_4.csv`),
+        d3.dsv(";", `/data/${key}_0.csv`).catch(ex => {}),
+        d3.dsv(";", `/data/${key}_1.csv`).catch(ex => {}),
+        d3.dsv(";", `/data/${key}_2.csv`).catch(ex => {}),
+        d3.dsv(";", `/data/${key}_3.csv`).catch(ex => {}),
+        d3.dsv(";", `/data/${key}_4.csv`).catch(ex => {}),
+        d3.dsv(";", `/data/${key}_5.csv`).catch(ex => {}),
+        d3.dsv(";", `/data/${key}_6.csv`).catch(ex => {}),
+        d3.dsv(";", `/data/${key}_7.csv`).catch(ex => {}),
+        d3.dsv(";", `/data/${key}_8.csv`).catch(ex => {}),
     ])
         .then(data => {
+            console.log(data);
             var iterSvg = d3.select(`#${diagrams[key]}_iter`);
             iterDiagram(data, iterSvg)
             var timeSvg = d3.select(`#${diagrams[key]}_t`);
