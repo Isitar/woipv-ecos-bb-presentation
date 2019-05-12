@@ -15,6 +15,7 @@ var diagrams = {
     'other_b_method': 'other_b',
     'other_node_selection': 'other_node_selection',
     'other_bb_score_min':'other_bb_score_min',
+    'other_bb_score_ab_pp08acuts':'other_bb_score_ab_pp08acuts'
 };
 
 
