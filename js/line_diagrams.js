@@ -22,6 +22,7 @@ var diagrams = {
     'other_bb_score_ab_pp08acuts':'other_bb_score_ab_pp08acuts',
     'other_bb_score_ab_update_psi_pp08acuts':'other_bb_score_ab_update_psi_pp08acuts',
     'other_bb_score_ab_update_psi_pp08acuts_long':'other_bb_score_ab_update_psi_pp08acuts_long',
+    'bf_ab_update_psi_pp08acuts':'bf_ab_update_psi_pp08acuts'
 };
 
 
@@ -123,7 +124,7 @@ function update(data, svg, activeData, extractX, extractYLB, extractYUB, xAxisTi
         const data = d[selectdI];
         
         focusText
-            .html("x:" + data.x + "  -  " + "y:" + data.y)
+            .html("x:" + Math.round(data.x) + "  -  " + "y:" + data.y)
             .attr("x", xScale(data.x) + 15)
             .attr("y", yScale(data.y))
     };
@@ -176,7 +177,7 @@ function update(data, svg, activeData, extractX, extractYLB, extractYUB, xAxisTi
     // legend
     const legend = g.append("g")
         .attr('id', 'legend')
-        .attr('transform', `translate(${width - 3 * margin.right}, 0)`);
+        .attr('transform', `translate(${width - 3 * margin.right}, ${height - legendEntriesArr.length * 30})`);
 
     const legendEntries = legend.selectAll()
         .data(legendEntriesArr)
