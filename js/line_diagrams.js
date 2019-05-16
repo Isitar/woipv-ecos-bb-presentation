@@ -22,6 +22,9 @@ var diagrams = {
     'other_bb_score_ab_pp08acuts':'other_bb_score_ab_pp08acuts',
     'other_bb_score_ab_update_psi_pp08acuts':'other_bb_score_ab_update_psi_pp08acuts',
     'other_bb_score_ab_update_psi_pp08acuts_long':'other_bb_score_ab_update_psi_pp08acuts_long',
+    'temp':'temp',
+    'pp08acuts_dive_ab':'pp08acuts_dive_ab',
+    'pp08acuts_bf_ab':'pp08acuts_bf_ab'
 };
 
 
