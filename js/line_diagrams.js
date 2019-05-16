@@ -126,7 +126,7 @@ function update(data, svg, activeData, extractX, extractYLB, extractYUB, xAxisTi
         const data = d[selectdI];
         
         focusText
-            .html("x:" + data.x + "  -  " + "y:" + data.y)
+            .html("x:" + Math.round(data.x) + "  -  " + "y:" + data.y)
             .attr("x", xScale(data.x) + 15)
             .attr("y", yScale(data.y))
     };
@@ -179,7 +179,7 @@ function update(data, svg, activeData, extractX, extractYLB, extractYUB, xAxisTi
     // legend
     const legend = g.append("g")
         .attr('id', 'legend')
-        .attr('transform', `translate(${width - 3 * margin.right}, 0)`);
+        .attr('transform', `translate(${width - 3 * margin.right}, ${height - legendEntriesArr.length * 30})`);
 
     const legendEntries = legend.selectAll()
         .data(legendEntriesArr)
