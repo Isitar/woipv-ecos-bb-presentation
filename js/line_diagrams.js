@@ -126,9 +126,11 @@ function update(data, svg, activeData, extractX, extractYLB, extractYUB, xAxisTi
         const data = d[selectdI];
         
         focusText
+            
             .html("x:" + Math.round(data.x) + "  -  " + "y:" + data.y)
-            .attr("x", xScale(data.x) + 15)
-            .attr("y", yScale(data.y))
+            //.attr("x", xScale(data.x) + 15)
+            .attr("x", width - 4 * margin.right)
+            .attr("y", margin.top)
     };
 
     function mouseout() {
