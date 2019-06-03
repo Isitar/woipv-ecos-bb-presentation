@@ -14,6 +14,9 @@ var diagrams = {
     'markshare_ab_dive_up': 'markshare_ab_dive_up',
     'markshare_ab_dive_down': 'markshare_ab_dive_down',
     'markshare_ab_bf': 'markshare_ab_bf',
+    'genip054_dive_up': 'genip054_dive_up',
+    'genip054_dive_down': 'genip054_dive_down',
+    'genip054_bf': 'genip054_bf',
 };
 
 
@@ -49,11 +52,11 @@ function update(data, svg, activeData, extractX, extractYLB, extractYUB, xAxisTi
     }
 
     minX = Math.min(minX, 0);
-    minY = Math.min(minY, 0);
+    //minY = Math.min(minY, 0);
     var xScale = d3.scaleLinear()
         .domain([minX, maxX])
         .range([0, width]);
-    maxY = 100;
+    //minY = 6500;
     var yScale = d3.scaleLinear()
         .domain([minY, maxY])
         .range([height, 0]);
